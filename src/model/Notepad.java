@@ -50,14 +50,37 @@ public class Notepad implements ActionListener, DocumentListener, CaretListener{
 		frame.setVisible(true);
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
-		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getActionCommand());
+		FileMenuMethodChooser(e);
+		EditMenuMethodChooser(e);
+		
+	}
 
+	@Override
+	public void insertUpdate(DocumentEvent e) {
+		changedText = true;
+	}
+
+	@Override
+	public void removeUpdate(DocumentEvent e) {
+		changedText = true;
+	}
+
+	@Override
+	public void changedUpdate(DocumentEvent e) {
+		changedText = true;
+	}
+
+	@Override
+	public void caretUpdate(CaretEvent e) {
+		statusJLabel.setText(CaretListenerHandler.setStatusLabel(e, notepadJTextArea));
+	}
+	
+	private void FileMenuMethodChooser(ActionEvent e){
 		switch (e.getActionCommand()) {
 		case Constants.FILE_SUBMENU_NEW_NAME:
 			FileJMenuHandler.newNotepad(frame, file, notepadJTextArea, changedText);
@@ -92,31 +115,44 @@ public class Notepad implements ActionListener, DocumentListener, CaretListener{
 		case Constants.FILE_SUBMENU_EXIT_NAME:
 			FileJMenuHandler.exit(frame, changedText);
 			break;
+		default:
+			break;
+		}
+	}
+	
+	private void EditMenuMethodChooser(ActionEvent e){
+		switch (e.getActionCommand()) {
+		case Constants.EDIT_SUBMENU_COPY_NAME:
+			notepadJTextArea.copy();
+			break;
+		case Constants.EDIT_SUBMENU_CUT_NAME:
+			notepadJTextArea.cut();
+			break;
+		case Constants.EDIT_SUBMENU_DELETE_NAME:
+			notepadJTextArea.replaceSelection("");
+			break;
+		case Constants.EDIT_SUBMENU_FIND_NAME:
+			
+			break;
+		case Constants.EDIT_SUBMENU_FIND_NEXT_NAME:
+			break;
+		case Constants.EDIT_SUBMENU_GO_TO_NAME:
+			break;
+		case Constants.EDIT_SUBMENU_PASTE_NAME:
+			notepadJTextArea.paste();
+			break;
+		case Constants.EDIT_SUBMENU_REPLACE_NAME:
+			break;
+		case Constants.EDIT_SUBMENU_SELECT_ALL_NAME:
+			notepadJTextArea.selectAll();
+			break;
+		case Constants.EDIT_SUBMENU_TIME_DATE_NAME:
+			break;
+		case Constants.EDIT_SUBMENU_UNDO_NAME:
+			break;
 
 		default:
 			break;
 		}
 	}
-
-	@Override
-	public void insertUpdate(DocumentEvent e) {
-		changedText = true;
-	}
-
-	@Override
-	public void removeUpdate(DocumentEvent e) {
-		changedText = true;
-	}
-
-	@Override
-	public void changedUpdate(DocumentEvent e) {
-		changedText = true;
-	}
-
-	@Override
-	public void caretUpdate(CaretEvent e) {
-		statusJLabel.setText(CaretListenerHandler.setStatusLabel(e, notepadJTextArea));
-	}
-	
-	
 }

@@ -53,7 +53,6 @@ public class Constants {
 	 * */
 	public final static String VIEW_SUBMENU_STATUS_BAR_NAME = "Status Bar";
 	
-	
 	/**
 	 * Edit Menu item Names
 	 * */

@@ -31,7 +31,6 @@ public class NotepadMenu{
 		fillFormatMenuWithItems(formatJMenu, notepad);
 		fillViewMenuWithItems(viewJMenu, notepad);
 		fillHelpMenuWithItems(helpJMenu, notepad);
-
 	}
 
 	private JMenu createJMenu(String name, int key, JMenuBar toMenuBar){
